@@ -16,16 +16,19 @@ function displayNews(responseJson){
     //loop throur news articles and show the title and description
     // provide title as a hyperlink
     for (let i = 0; i < responseJson.data.length; i++){
-        $('#results').append(
+        const currentItem = responseJson.data[i];
+
+        $('#results-list').append(
             `<li>
-                <h3><a href="${responseJson.data[i].news_url}">${responseJson.data[i].title}</a></h3>
-                <img src="${responseJson.data[i].image_url}">
+                <h3><a href="${currentItem.news_url}">${currentItem.title}</a></h3>
+                <img src="${currentItem.image_url}">
             </li>
          `
         )
     }
 
     $('#results').removeClass('hidden');
+    
 }
 
 function getNews(ticker) {
