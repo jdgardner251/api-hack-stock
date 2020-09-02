@@ -19,7 +19,7 @@ function displayNews(responseJson){
         const currentItem = responseJson.data[i];
 
         $('#results-list').append(
-            `<li>
+            `<li class="item">
                 <h3><a href="${currentItem.news_url}">${currentItem.title}</a></h3>
                 <img src="${currentItem.image_url}">
             </li>
@@ -35,7 +35,7 @@ function getNews(ticker) {
     console.log('getNews is running');
     const urlTicker = ticker;
     console.log(urlTicker);
-    const url = `https://stocknewsapi.com/api/v1?tickers=${urlTicker}&items=10&token=7odsz0k5jiqtfw0onngjimmcovsocjagkoasakw0`
+    const url = `https://stocknewsapi.com/api/v1?tickers=${urlTicker}&items=3&token=7odsz0k5jiqtfw0onngjimmcovsocjagkoasakw0`
 
     fetch(url)
         .then(response => response.json()
@@ -48,9 +48,10 @@ function displayQuote(responseJson){
     const currentStock = responseJson.quoteResponse.result[0];
     $('#quote').empty();
     $('#quote').html(
-        `<h3>${currentStock.displayName}</h3>
-            <p>Ticker: "${currentStock.symbol}"</p>
-            <p>Current Price: ${currentStock.regularMarketPrice}</p>
+        `<h3>${currentStock.longName}</h3>
+            <p>Ticker: ${currentStock.symbol}</p>
+            <p>Current Price: ${currentStock.regularMarketPrice} </p>
+            <p>% Change: ${currentStock.regularMarketChangePercent}</p>
         `
     )
 
@@ -79,6 +80,7 @@ function getQuote(ticker) {
 
 function watchForm() {
     console.log('watchForm is running');
+    
     $('form').submit(event => {
       event.preventDefault();
       const ticker = $('#js-ticker').val();
