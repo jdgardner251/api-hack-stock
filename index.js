@@ -10,7 +10,7 @@ const apiKey = "a34d8976d7mshb593b216380e63dp1ef646jsn7d7b2bf5b066";
 // x-rapidapi-key: a34d8976d7mshb593b216380e63dp1ef646jsn7d7b2bf5b066
 'use strict';
 
-
+// Take the object response from stockNews to reder the url, title, and image of articles
 function displayNews(responseJson){
     console.log(responseJson)
     console.log(responseJson.data[0].title)
@@ -33,9 +33,8 @@ function displayNews(responseJson){
     $('#results').removeClass('hidden');
     
 }
-
+// use the url to take the user input and fetch data from stocknews API
 function getNews(ticker) {
-    console.log('getNews is running');
     const urlTicker = ticker;
     console.log(urlTicker);
     const url = `https://stocknewsapi.com/api/v1?tickers=${urlTicker}&items=4&token=7odsz0k5jiqtfw0onngjimmcovsocjagkoasakw0`
@@ -48,6 +47,7 @@ function getNews(ticker) {
         }));
 }
 
+// take the response object to show the symbol, current price, and %Change from yesterday
 function displayQuote(responseJson){
     console.log(responseJson);
     const currentStock = responseJson.quoteResponse.result[0];
@@ -69,12 +69,12 @@ function displayQuote(responseJson){
     $('#quote').removeClass('hidden');
 
 }
-
+ // use yahoo finance API to take the user input combined with yahoo API url to request data
 function getQuote(ticker) {
     console.log('Get quote is running')
     const queryURL = yahooURL + ticker;
     console.log(queryURL);
-
+// this are the required headers to be passed in with the url to the fetch
     const options = {
         headers: new Headers({
             "x-rapidapi-host": "yahoo-finance-free.p.rapidapi.com",
@@ -92,8 +92,7 @@ function getQuote(ticker) {
 }
 
 function watchForm() {
-    console.log('watchForm is running');
-    
+    //Listen for a submit on the button
     $('form').submit(event => {
       event.preventDefault();
       const ticker = $('#js-ticker').val();
