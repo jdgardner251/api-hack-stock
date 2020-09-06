@@ -52,7 +52,8 @@
   border: 1px solid transparent;
   margin-top: 15px;
   padding: 8px 12px;
-  font-size: 1rem;
+  width: 100px;
+  font-weight: 700;
 }
   
 ul {
@@ -77,8 +78,6 @@ ul {
     width: 100%;
   }
 
-  
- 
   .container {
     max-width: 900px;
     padding-left: 5px;
