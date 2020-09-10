@@ -6,8 +6,8 @@
 'use strict';
 /*****************               GLOBAL VARIABLES                ********************/
 
-const yahooURL = "https://yahoo-finance-free.p.rapidapi.com/v6/finance/quote?region=US&lang=en&symbols="
-const apiKey = "a34d8976d7mshb593b216380e63dp1ef646jsn7d7b2bf5b066";
+const yahooURL = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-quotes?symbols=aapl&region=US"
+const apiKey = "0a8f1a7f93msh2820a1e30bd934ep148858jsn9d1d4884528d";
 
 /***********  WATCHFORM TO WAIT FOR A SUBMIT   ************/
 function watchForm() {
@@ -46,10 +46,7 @@ function displayNews(responseJson){
     }
     $('#results').removeClass('hidden');
 
-    }
-
-
-    
+    }   
 }
 // use the url to take the user input and fetch data from stocknews API
 function getNews(ticker) {
@@ -69,6 +66,7 @@ function getNews(ticker) {
 
 // take the response object to show the symbol, current price, and %Change from yesterday
 function displayQuote(responseJson){
+    console.log(responseJson);
     $('#quote').empty();
     if (responseJson.quoteResponse.result.length === 0){
         $('#js-quote-error-message').text(`We don't recognize that ticker. Please try another`);
@@ -92,11 +90,12 @@ function displayQuote(responseJson){
 }
  // use yahoo finance API to take the user input combined with yahoo API url to request data
 function getQuote(ticker) {
-    const queryURL = yahooURL + ticker;
+    const queryURL = `https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/v2/get-quotes?symbols=${ticker}&region=US`;
+    console.log(queryURL);
 // this are the required headers to be passed in with the url to the fetch
     const options = {
         headers: new Headers({
-            "x-rapidapi-host": "yahoo-finance-free.p.rapidapi.com",
+            "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com",
             "x-rapidapi-key": apiKey
         })
     };
